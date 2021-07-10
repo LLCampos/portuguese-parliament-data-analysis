@@ -1,0 +1,9 @@
+.ipynb_checkpoints
+project/
+.metals/
+.bloop/
+.ammonite/
+metals.sbt
+.bsp
+target/
+.vscode
