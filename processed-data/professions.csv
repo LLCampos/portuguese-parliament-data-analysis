@@ -1,0 +1,224 @@
+legislatureNumber,profession_cat,number_of_deputados
+II,Engineering,10
+II,Academy,12
+II,Law,26
+II,Economy,6
+II,Teaching,10
+II,Journalism,3
+II,deputado,2
+II,Medicine,5
+II,Writing,3
+II,Public Servant,3
+II,Management,6
+II,Unknown,329
+II,Others,11
+II,Banking,2
+II,Blue Collar,4
+III,Academy,13
+III,Law,37
+III,Economy,6
+III,Teaching,23
+III,Journalism,2
+III,Business,2
+III,Retired,2
+III,deputado,2
+III,Medicine,5
+III,Writing,4
+III,Engineering,14
+III,,304
+III,Public Servant,6
+III,Management,9
+III,Unknown,11
+III,Others,14
+III,Banking,8
+III,Blue Collar,6
+IV,Engineering,14
+IV,Academy,16
+IV,Law,39
+IV,Economy,9
+IV,Teaching,19
+IV,Journalism,3
+IV,Business,3
+IV,Retired,2
+IV,deputado,2
+IV,Medicine,5
+IV,Writing,4
+IV,Public Servant,6
+IV,Management,13
+IV,Insurance,3
+IV,Unknown,243
+IV,Others,12
+IV,Banking,6
+IV,Blue Collar,4
+V,Engineering,19
+V,Academy,14
+V,Law,55
+V,assessor,2
+V,Economy,18
+V,Teaching,33
+V,Journalism,4
+V,Business,2
+V,Retired,2
+V,Writing,4
+V,Public Servant,6
+V,Management,15
+V,Medicine,8
+V,Office Work,2
+V,Insurance,5
+V,Unknown,174
+V,Others,20
+V,Accounting,2
+V,Banking,8
+V,Blue Collar,5
+V,Student,2
+VI,Engineering,30
+VI,Academy,25
+VI,Law,76
+VI,assessor,2
+VI,Party Worker,3
+VI,Economy,28
+VI,Journalism,4
+VI,Business,7
+VI,Retired,5
+VI,Writing,2
+VI,Public Servant,18
+VI,Management,23
+VI,Teaching,52
+VI,Pharmacy,2
+VI,Medicine,12
+VI,Office Work,2
+VI,Insurance,4
+VI,Others,28
+VI,Accounting,2
+VI,Banking,12
+VI,Blue Collar,6
+VI,Student,6
+VII,Academy,34
+VII,Consulting,3
+VII,Law,83
+VII,Economy,26
+VII,Teaching,41
+VII,Journalism,5
+VII,Business,9
+VII,Retired,11
+VII,Medicine,19
+VII,Writing,2
+VII,Social Worker,2
+VII,Architecture,3
+VII,Engineering,27
+VII,Public Servant,17
+VII,Management,26
+VII,Unknown,6
+VII,Others,24
+VII,Accounting,2
+VII,Banking,15
+VII,Student,7
+VIII,Academy,35
+VIII,Consulting,7
+VIII,Nursing,2
+VIII,Law,78
+VIII,Economy,26
+VIII,Teaching,45
+VIII,Journalism,2
+VIII,Business,10
+VIII,Retired,7
+VIII,Medicine,10
+VIII,Writing,3
+VIII,Architecture,2
+VIII,Engineering,16
+VIII,Public Servant,17
+VIII,Management,20
+VIII,Unknown,3
+VIII,Others,26
+VIII,Accounting,5
+VIII,Banking,9
+VIII,Blue Collar,3
+VIII,Student,3
+X,Academy,46
+X,Consulting,9
+X,Law,90
+X,Sociology,3
+X,Tourism,2
+X,Economy,22
+X,Teaching,50
+X,Journalism,3
+X,Business,5
+X,Retired,8
+X,Medicine,10
+X,Writing,3
+X,Social Worker,3
+X,Architecture,4
+X,Engineering,14
+X,Public Servant,15
+X,Management,18
+X,Unknown,11
+X,Others,29
+X,Banking,3
+X,Blue Collar,4
+XI,Acting,2
+XI,Academy,32
+XI,Consulting,10
+XI,Nursing,2
+XI,Law,66
+XI,Sociology,3
+XI,Economy,20
+XI,Journalism,4
+XI,Business,4
+XI,Retired,5
+XI,Medicine,7
+XI,Social Worker,2
+XI,Architecture,2
+XI,Engineering,9
+XI,Public Servant,9
+XI,Management,15
+XI,Teaching,30
+XI,Pharmacy,2
+XI,Unknown,5
+XI,Others,23
+XI,Accounting,2
+XI,Banking,2
+XI,Blue Collar,4
+XII,Acting,2
+XII,Academy,35
+XII,Consulting,15
+XII,Law,81
+XII,Sociology,3
+XII,Economy,23
+XII,editor,2
+XII,Teaching,37
+XII,Journalism,3
+XII,Retired,6
+XII,Medicine,9
+XII,Social Worker,2
+XII,Engineering,12
+XII,Public Servant,9
+XII,Management,19
+XII,Business,5
+XII,Psychology,4
+XII,Unknown,8
+XII,Others,32
+XII,Banking,3
+XII,Blue Collar,3
+XIII,Acting,3
+XIII,Academy,44
+XIII,Consulting,12
+XIII,Nursing,3
+XIII,Law,73
+XIII,Sociology,3
+XIII,Economy,24
+XIII,Teaching,26
+XIII,Journalism,2
+XIII,Retired,6
+XIII,Biology,2
+XIII,Medicine,6
+XIII,Architecture,5
+XIII,Engineering,13
+XIII,Public Servant,11
+XIII,Management,21
+XIII,Business,6
+XIII,Psychology,6
+XIII,Unknown,5
+XIII,Others,30
+XIII,Accounting,2
+XIII,Banking,5
+XIII,Blue Collar,3

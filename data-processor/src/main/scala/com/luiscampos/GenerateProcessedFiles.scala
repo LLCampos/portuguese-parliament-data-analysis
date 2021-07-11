@@ -4,12 +4,15 @@ import com.luiscampos.model.parser.RawDeputadoParser
 import com.luiscampos.model.RawDeputado
 import com.luiscampos.model.Legislature
 
+import java.io._
+
 object GenerateProcessedFiles extends App {
 
   def filePath(legislature: String) =
     s"../raw-data/RegistoBiografico$legislature.json"
 
-  val legislatureNumbers = Seq("II", "III", "IV", "V", "VI", "VII", "VIII", "X", "XI", "XII", "XIII")
+  val legislatureNumbers =
+    Seq("II", "III", "IV", "V", "VI", "VII", "VIII", "X", "XI", "XII", "XIII")
 
   val legislatures = legislatureNumbers.map { legislature =>
     RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
@@ -26,11 +29,31 @@ object GenerateProcessedFiles extends App {
     }
   }.flatten
 
-  legislatures.foreach { l =>
-    println(l.legislatureNumber)
-    println()
-    l.professions.toSeq.sortBy(_._2).reverse.foreach(println)
-    println("--------------------")
+  // legislatures.foreach { l =>
+  //   println(l.legislatureNumber)
+  //   println()
+  //   l.professions.toSeq.sortBy(_._2).reverse.foreach(println)
+  //   println("--------------------")
+  // }
+
+  writeToFile("../processed-data/professions.csv", toCsv(legislatures))
+
+  private def writeToFile(filePath: String, content: String): Unit = {
+    val pw = new PrintWriter(new File(filePath))
+    pw.write(content)
+    pw.close
+  }
+
+  private def toCsv(legislatures: Seq[Legislature]): String = {
+    val columnNames = "legislatureNumber,profession_cat,number_of_deputados"
+    val rows = legislatures
+      .flatMap { legislature =>
+        legislature.professions.map { case (profession_cat, n) =>
+          s"${legislature.legislatureNumber},$profession_cat,$n"
+        }
+      }
+      .mkString("\n")
+    columnNames + "\n" + rows
   }
 
   private def groupProfessionsByCategory(
