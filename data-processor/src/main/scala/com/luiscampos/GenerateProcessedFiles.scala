@@ -9,7 +9,7 @@ object GenerateProcessedFiles extends App {
   def filePath(legislature: String) =
     s"../raw-data/RegistoBiografico$legislature.json"
 
-  val legislatureNumbers = Seq("X", "XI", "XII", "XIII")
+  val legislatureNumbers = Seq("II", "III", "IV", "V", "VI", "VII", "VIII", "X", "XI", "XII", "XIII")
 
   val legislatures = legislatureNumbers.map { legislature =>
     RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
@@ -26,7 +26,7 @@ object GenerateProcessedFiles extends App {
     }
   }.flatten
 
-  legislatures.foreach { l => 
+  legislatures.foreach { l =>
     println(l.legislatureNumber)
     println()
     l.professions.toSeq.sortBy(_._2).reverse.foreach(println)
@@ -42,6 +42,7 @@ object GenerateProcessedFiles extends App {
       .view
       .mapValues(_.size)
       .partition(_._2 > 1)
+    // others.toMap.keys.foreach(println)
     main.toMap + ("Others" -> others.values.sum)
   }
 
