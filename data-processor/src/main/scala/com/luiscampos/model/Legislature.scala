@@ -3,7 +3,7 @@ package com.luiscampos.model
 import Legislature._
 
 final case class Legislature(
-  legislatureNumber: String, // Roman numeral
+  number: Int,
   professions: Professions
 )
 

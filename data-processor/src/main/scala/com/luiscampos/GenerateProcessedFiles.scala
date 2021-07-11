@@ -11,15 +11,29 @@ object GenerateProcessedFiles extends App {
   def filePath(legislature: String) =
     s"../raw-data/RegistoBiografico$legislature.json"
 
-  val legislatureNumbers =
+  val legislatureNumbersRoman =
     Seq("II", "III", "IV", "V", "VI", "VII", "VIII", "X", "XI", "XII", "XIII")
 
-  val legislatures = legislatureNumbers.map { legislature =>
+  val legislatureNumbersTrans = Map(
+    "II" -> 2,
+    "III" -> 3,
+    "IV" -> 4,
+    "V" -> 5,
+    "VI" -> 6,
+    "VII" -> 7,
+    "VIII" -> 8,
+    "X" -> 9,
+    "XI" -> 10,
+    "XII" -> 11,
+    "XIII" -> 12
+  )
+
+  val legislatures = legislatureNumbersRoman.map { legislature =>
     RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
       case Right(deputados) =>
         Some(
           Legislature(
-            legislature,
+            legislatureNumbersTrans.get(legislature).get,
             groupProfessionsByCategory(getProfessions(deputados))
           )
         )
@@ -49,7 +63,7 @@ object GenerateProcessedFiles extends App {
     val rows = legislatures
       .flatMap { legislature =>
         legislature.professions.map { case (profession_cat, n) =>
-          s"${legislature.legislatureNumber},$profession_cat,$n"
+          s"${legislature.number},$profession_cat,$n"
         }
       }
       .mkString("\n")
