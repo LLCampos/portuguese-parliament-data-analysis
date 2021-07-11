@@ -16,7 +16,9 @@ object ProfessionNormalizer {
     "programador" -> "IT",
     "computador" -> "IT",
     "engenheir" -> "Engineering",
+    "engº" -> "Engineering",
     "eng." -> "Engineering",
+    "eng " -> "Engineering",
     "biolog" -> "Biology",
     "sociolog" -> "Sociology",
     "gestor" -> "Management",
@@ -27,6 +29,7 @@ object ProfessionNormalizer {
     "tecnica superior" -> "Public Servant",
     "tec. superior" -> "Public Servant",
     "funcionario publico" -> "Public Servant",
+    "funcionaria publica" -> "Public Servant",
     "aposentad" -> "Retired",
     "empresari" -> "Business",
     "matematico" -> "Maths",
@@ -40,6 +43,7 @@ object ProfessionNormalizer {
     "electricista" -> "Blue Collar",
     "operari" -> "Blue Collar",
     "afinador" -> "Blue Collar",
+    "trabalhador agricola" -> "Blue Collar",
     "tributario" -> "Accounting",
     "contabilista" -> "Accounting",
     "antropol" -> "Anthropology",
@@ -52,6 +56,7 @@ object ProfessionNormalizer {
     "design" -> "Design",
     "assistente social" -> "Social Worker",
     "turismo" -> "Tourism",
+    "estudante" -> "Student",
     "unknown" -> "Unknown",
   )
 
