@@ -9,14 +9,17 @@ object ProfessionNormalizer {
   )
 
   def normalize(profession: String): String = {
-    normalizeToCategory(StringUtils.stripAccents(profession.toLowerCase()))
+    normalizeToCategory(StringUtils.stripAccents(profession.toLowerCase().trim()))
   }
 
   private def normalizeToCategory(profession: String): String =
-    professionCategories.find {
-      case (keyWord, _) => {
-        profession.contains(keyWord)
+    professionCategories
+      .find {
+        case (keyWord, _) => {
+          profession.contains(keyWord)
+        }
       }
-    }.map(_._2).getOrElse(profession)
+      .map(_._2)
+      .getOrElse(profession)
 
 }
