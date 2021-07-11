@@ -7,7 +7,12 @@ object GenerateProcessedFiles extends App {
   val filePath = "../raw-data/RegistoBiograficoXIV.json"
 
   RawDeputadoParser.getRawDeputados(filePath) match {
-    case Right(deputados) => deputados.map(_.cadProfissao).foreach(d => println(s"${d.getOrElse("NULL")}"))
+    case Right(deputados) =>
+      deputados
+        .map(_.cadProfissao)
+        .map(_.getOrElse("NULL"))
+        .map(ProfessionNormalizer.normalize)
+        .foreach(d => println(s"${d}"))
     case Left(err) => println(err)
   }
 }

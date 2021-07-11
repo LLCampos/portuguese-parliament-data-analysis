@@ -14,3 +14,5 @@ libraryDependencies ++= Seq(
   "io.circe" %% "circe-parser"
 ).map(_ % circeVersion)
 
+libraryDependencies += "org.apache.commons" % "commons-text" % "1.9"
+
