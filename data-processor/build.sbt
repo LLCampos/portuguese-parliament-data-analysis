@@ -2,7 +2,7 @@ scalaVersion := "2.13.6"
 
 
 name := "data-processor"
-organization := "io.luiscampos"
+organization := "com.luiscampos"
 version := "1.0"
 
 

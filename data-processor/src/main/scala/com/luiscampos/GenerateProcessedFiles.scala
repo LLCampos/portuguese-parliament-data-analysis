@@ -1,7 +1,11 @@
-import scala.io.Source
+package com.luiscampos
 
 import io.circe._
 import io.circe.parser._
+
+import scala.io.Source
+
+import model.RawDeputado
 
 object FileUtil {
   def fileToString(filePath: String): String =
