@@ -25,7 +25,7 @@ object RawDeputadoParser {
       .as[Seq[RawDeputado]]
 
   def getRawDeputados(filePath: String): Either[Error, Seq[RawDeputado]] = 
-    FileUtil.fileToJson("../raw-data/RegistoBiograficoXIV.json").flatMap(json => {
+    FileUtil.fileToJson(filePath).flatMap(json => {
       RawDeputadoParser.fromRawJson(json)
     })
 

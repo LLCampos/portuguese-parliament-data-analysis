@@ -1,8 +1,6 @@
 package com.luiscampos.model
 
 import io.circe.Decoder
-import io.circe.Json
-import io.circe._
 import io.circe.generic.semiauto._
 
 final case class RawDeputado(
