@@ -2,12 +2,40 @@ package com.luiscampos
 
 import com.luiscampos.model.parser.RawDeputadoParser
 import com.luiscampos.model.RawDeputado
+import com.luiscampos.model.Legislature
 
 object GenerateProcessedFiles extends App {
 
-  val filePath = "../raw-data/RegistoBiograficoXIV.json"
+  def filePath(legislature: String) =
+    s"../raw-data/RegistoBiografico$legislature.json"
 
-  def groupProfessionsByCategory(professions: Seq[String]): Map[String, Int] = {
+  val legislatureNumbers = Seq("X", "XI", "XII", "XIII")
+
+  val legislatures = legislatureNumbers.map { legislature =>
+    RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
+      case Right(deputados) =>
+        Some(
+          Legislature(
+            legislature,
+            groupProfessionsByCategory(getProfessions(deputados))
+          )
+        )
+      case Left(err) =>
+        println(err)
+        None
+    }
+  }.flatten
+
+  legislatures.foreach { l => 
+    println(l.legislatureNumber)
+    println()
+    l.professions.toSeq.sortBy(_._2).reverse.foreach(println)
+    println("--------------------")
+  }
+
+  private def groupProfessionsByCategory(
+      professions: Seq[String]
+  ): Map[String, Int] = {
     val (main, others) = professions
       .map(ProfessionNormalizer.normalize)
       .groupBy(identity)
@@ -17,17 +45,8 @@ object GenerateProcessedFiles extends App {
     main.toMap + ("Others" -> others.values.sum)
   }
 
-  def getProfessions(deputados: Seq[RawDeputado]): Seq[String] =
+  private def getProfessions(deputados: Seq[RawDeputado]): Seq[String] =
     deputados
       .map(_.cadProfissao)
       .map(_.getOrElse("Unknown"))
-
-  RawDeputadoParser.getRawDeputados(filePath) match {
-    case Right(deputados) =>
-      groupProfessionsByCategory(getProfessions(deputados)).toSeq
-        .sortBy(_._2)
-        .reverse
-        .foreach(d => println(s"${d}"))
-    case Left(err) => println(err)
-  }
 }
