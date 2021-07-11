@@ -12,7 +12,8 @@ object GenerateProcessedFiles extends App {
         .map(_.cadProfissao)
         .map(_.getOrElse("NULL"))
         .map(ProfessionNormalizer.normalize)
-        .groupBy(identity).view.mapValues(_.size)
+        .groupBy(identity).view.mapValues(_.size).toSeq
+        .sortBy(_._2).reverse
         .foreach(d => println(s"${d}"))
     case Left(err) => println(err)
   }
