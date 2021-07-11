@@ -35,6 +35,7 @@ object ProfessionNormalizer {
     "jornalis" -> "Journalism",
     "universitari" -> "Academy",
     "investigador" -> "Academy",
+    "ensino superior" -> "Academy",
     "arqueolog" -> "Archeology",
     "electricista" -> "Blue Collar",
     "operari" -> "Blue Collar",
@@ -49,6 +50,8 @@ object ProfessionNormalizer {
     "call center" -> "Call Center",
     "arquitect" -> "Architecture",
     "design" -> "Design",
+    "assistente social" -> "Social Worker",
+    "turismo" -> "Tourism",
     "unknown" -> "Unknown",
   )
 
