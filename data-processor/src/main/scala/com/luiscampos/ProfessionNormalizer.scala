@@ -49,6 +49,7 @@ object ProfessionNormalizer {
     "call center" -> "Call Center",
     "arquitect" -> "Architecture",
     "design" -> "Design",
+    "unknown" -> "Unknown",
   )
 
   def normalize(profession: String): String = {

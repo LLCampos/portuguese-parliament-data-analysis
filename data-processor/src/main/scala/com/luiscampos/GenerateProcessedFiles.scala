@@ -20,7 +20,7 @@ object GenerateProcessedFiles extends App {
     case Right(deputados) =>
       val professions = deputados
         .map(_.cadProfissao)
-        .map(_.getOrElse("NULL"))
+        .map(_.getOrElse("Unknown"))
       groupProfessionsByCategory(professions).toSeq
         .sortBy(_._2)
         .reverse
