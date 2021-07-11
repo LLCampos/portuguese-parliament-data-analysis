@@ -31,6 +31,7 @@ object ProfessionNormalizer {
     "funcionario publico" -> "Public Servant",
     "funcionaria publica" -> "Public Servant",
     "aposentad" -> "Retired",
+    "reformad" -> "Retired",
     "empresari" -> "Business",
     "matematico" -> "Maths",
     "actriz" -> "Acting",
@@ -46,6 +47,7 @@ object ProfessionNormalizer {
     "trabalhador agricola" -> "Blue Collar",
     "tributario" -> "Accounting",
     "contabilista" -> "Accounting",
+    "tecnico oficial de contas" -> "Accounting",
     "antropol" -> "Anthropology",
     "historiad" -> "History",
     "museologo" -> "Museology",
@@ -57,6 +59,9 @@ object ProfessionNormalizer {
     "assistente social" -> "Social Worker",
     "turismo" -> "Tourism",
     "estudante" -> "Student",
+    "enfermeir" -> "Nursing",
+    "secretari" -> "Secretary",
+    "funcionario do pcp" -> "Party Worker",
     "unknown" -> "Unknown",
   )
 
