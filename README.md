@@ -7,7 +7,7 @@ Data was processed from Scala code at `data-processor` and `data-viz` contains s
 
 ### **Notes on `professions.csv`**
 
-It was built by grouping the members of parliaments' professions in a bunch of categories that **I** though made sense.
+It was built by grouping the members of parliaments' professions in a bunch of categories that **I** thought made sense.
 
 If a member has more than one profession listed, the program picks one arbitrarily.
 
