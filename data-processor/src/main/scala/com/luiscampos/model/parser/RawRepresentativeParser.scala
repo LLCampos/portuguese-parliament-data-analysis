@@ -5,7 +5,7 @@ import com.luiscampos.util.FileUtil
 import io.circe._
 
 object RawRepresentativeParser {
-  def fromRawJson(json: Json): Either[DecodingFailure, Seq[RawRepresentative]] =
+  def fromRegistoBiograficoJson(json: Json): Either[DecodingFailure, Seq[RawRepresentative]] =
     json.hcursor
       .downField("RegistoBiografico")
       .downField("RegistoBiograficoList")
@@ -14,11 +14,11 @@ object RawRepresentativeParser {
       .get
       .as[Seq[RawRepresentative]]
 
-  def getRawRepresentatives(filePath: String): Either[Error, Seq[RawRepresentative]] =
+  def fromRegistoBiograficoFile(filePath: String): Either[Error, Seq[RawRepresentative]] =
     FileUtil
       .fileToJson(filePath)
       .flatMap(json => {
-        RawRepresentativeParser.fromRawJson(json)
+        RawRepresentativeParser.fromRegistoBiograficoJson(json)
       })
 
 }
