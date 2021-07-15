@@ -1,7 +1,7 @@
 package com.luiscampos
 
 import com.luiscampos.model._
-import com.luiscampos.model.parser.RawDeputadoParser
+import com.luiscampos.model.parser.RawRepresentativeParser
 
 
 object GenerateProcessedFiles extends App {
@@ -28,9 +28,9 @@ object GenerateProcessedFiles extends App {
 
   // Doesn't handle representatives changing professions but that's probably ok?
   val representatives = legislatureNumbersRoman.map { legislatureNumber =>
-    RawDeputadoParser.getRawDeputados(filePath(legislatureNumber)) match {
-      case Right(rawDeputados: Seq[RawDeputado]) =>
-        rawDeputados.map(_.toRepresentative).map(r => r.id -> r).toMap
+    RawRepresentativeParser.getRawRepresentatives(filePath(legislatureNumber)) match {
+      case Right(rawRep: Seq[RawRepresentative]) =>
+        rawRep.map(_.toRepresentative).map(r => r.id -> r).toMap
       case Left(err) =>
         println(err)
         Map.empty

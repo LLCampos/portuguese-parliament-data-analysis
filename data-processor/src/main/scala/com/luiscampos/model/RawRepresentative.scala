@@ -4,7 +4,7 @@ import com.luiscampos.ProfessionNormalizer
 import io.circe.Decoder
 import io.circe.generic.semiauto._
 
-final case class RawDeputado(
+final case class RawRepresentative(
     cadProfissao: Option[String],
     cadId: RepresentativeId
 ) {
@@ -14,9 +14,9 @@ final case class RawDeputado(
       cadId,
       cadProfissao.map(ProfessionNormalizer.normalize)
     )
-    
+
 }
 
-object RawDeputado {
-  implicit val fooDecoder: Decoder[RawDeputado] = deriveDecoder[RawDeputado]
+object RawRepresentative {
+  implicit val fooDecoder: Decoder[RawRepresentative] = deriveDecoder[RawRepresentative]
 }

@@ -1,24 +1,24 @@
 package com.luiscampos.model.parser
 
-import com.luiscampos.model.RawDeputado
+import com.luiscampos.model.RawRepresentative
 import com.luiscampos.util.FileUtil
 import io.circe._
 
-object RawDeputadoParser {
-  def fromRawJson(json: Json): Either[DecodingFailure, Seq[RawDeputado]] =
+object RawRepresentativeParser {
+  def fromRawJson(json: Json): Either[DecodingFailure, Seq[RawRepresentative]] =
     json.hcursor
       .downField("RegistoBiografico")
       .downField("RegistoBiograficoList")
       .downField("pt_ar_wsgode_objectos_DadosRegistoBiograficoWeb")
       .focus
       .get
-      .as[Seq[RawDeputado]]
+      .as[Seq[RawRepresentative]]
 
-  def getRawDeputados(filePath: String): Either[Error, Seq[RawDeputado]] =
+  def getRawRepresentatives(filePath: String): Either[Error, Seq[RawRepresentative]] =
     FileUtil
       .fileToJson(filePath)
       .flatMap(json => {
-        RawDeputadoParser.fromRawJson(json)
+        RawRepresentativeParser.fromRawJson(json)
       })
 
 }
