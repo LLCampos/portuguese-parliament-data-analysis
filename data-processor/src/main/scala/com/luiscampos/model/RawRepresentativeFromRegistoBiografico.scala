@@ -8,7 +8,7 @@ import io.circe.DecodingFailure
 import io.circe.Json
 import io.circe
 
-final case class RawRepresentative(
+final case class RawRepresentativeFromRegistoBiografico(
   cadProfissao: Option[String],
   cadId: RepresentativeId
 ) {
@@ -21,23 +21,23 @@ final case class RawRepresentative(
 
 }
 
-object RawRepresentative {
-  implicit val fooDecoder: Decoder[RawRepresentative] =
-    deriveDecoder[RawRepresentative]
+object RawRepresentativeFromRegistoBiografico {
+  implicit val fooDecoder: Decoder[RawRepresentativeFromRegistoBiografico] =
+    deriveDecoder[RawRepresentativeFromRegistoBiografico]
 
-  def fromRegistoBiograficoJson(json: Json): Either[DecodingFailure, Seq[RawRepresentative]] =
+  def fromRegistoBiograficoJson(json: Json): Either[DecodingFailure, Seq[RawRepresentativeFromRegistoBiografico]] =
     json.hcursor
       .downField("RegistoBiografico")
       .downField("RegistoBiograficoList")
       .downField("pt_ar_wsgode_objectos_DadosRegistoBiograficoWeb")
       .focus
       .get
-      .as[Seq[RawRepresentative]]
+      .as[Seq[RawRepresentativeFromRegistoBiografico]]
 
-  def fromRegistoBiograficoFile(filePath: String): Either[circe.Error, Seq[RawRepresentative]] =
+  def fromRegistoBiograficoFile(filePath: String): Either[circe.Error, Seq[RawRepresentativeFromRegistoBiografico]] =
     FileUtil
       .fileToJson(filePath)
       .flatMap(json => {
-        RawRepresentative.fromRegistoBiograficoJson(json)
+        RawRepresentativeFromRegistoBiografico.fromRegistoBiograficoJson(json)
       })
 }

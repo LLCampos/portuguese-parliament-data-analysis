@@ -26,8 +26,8 @@ object GenerateProcessedFiles extends App {
 
   // Doesn't handle representatives changing professions but that's probably ok?
   val representatives = legislatureNumbersRoman.map { legislatureNumber =>
-    RawRepresentative.fromRegistoBiograficoFile(filePath(legislatureNumber)) match {
-      case Right(rawRep: Seq[RawRepresentative]) =>
+    RawRepresentativeFromRegistoBiografico.fromRegistoBiograficoFile(filePath(legislatureNumber)) match {
+      case Right(rawRep: Seq[RawRepresentativeFromRegistoBiografico]) =>
         rawRep.map(_.toRepresentative).map(r => r.id -> r).toMap
       case Left(err) =>
         println(err)
