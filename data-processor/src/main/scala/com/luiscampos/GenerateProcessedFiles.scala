@@ -1,8 +1,6 @@
 package com.luiscampos
 
 import com.luiscampos.model._
-import com.luiscampos.model.parser.RawRepresentativeParser
-
 
 object GenerateProcessedFiles extends App {
 
@@ -28,7 +26,7 @@ object GenerateProcessedFiles extends App {
 
   // Doesn't handle representatives changing professions but that's probably ok?
   val representatives = legislatureNumbersRoman.map { legislatureNumber =>
-    RawRepresentativeParser.fromRegistoBiograficoFile(filePath(legislatureNumber)) match {
+    RawRepresentative.fromRegistoBiograficoFile(filePath(legislatureNumber)) match {
       case Right(rawRep: Seq[RawRepresentative]) =>
         rawRep.map(_.toRepresentative).map(r => r.id -> r).toMap
       case Left(err) =>
@@ -36,8 +34,6 @@ object GenerateProcessedFiles extends App {
         Map.empty
     }
   }.flatten.toMap
-
-  
 
   // val legislatures = legislatureNumbersRoman.map { legislature =>
   //   RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
@@ -100,4 +96,4 @@ object GenerateProcessedFiles extends App {
 //     deputados
 //       .map(_.cadProfissao)
 //       .map(_.getOrElse("Unknown"))
- }
+}
