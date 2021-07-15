@@ -4,7 +4,8 @@ import Legislature._
 
 final case class Legislature(
   number: Int,
-  professions: Professions
+  professions: Professions,
+  representatives: Seq[RepresentativeId]
 )
 
 object Legislature {

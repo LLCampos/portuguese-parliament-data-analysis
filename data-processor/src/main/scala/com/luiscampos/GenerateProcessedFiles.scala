@@ -1,10 +1,8 @@
 package com.luiscampos
 
+import com.luiscampos.model._
 import com.luiscampos.model.parser.RawDeputadoParser
-import com.luiscampos.model.RawDeputado
-import com.luiscampos.model.Legislature
 
-import java.io._
 
 object GenerateProcessedFiles extends App {
 
@@ -28,20 +26,35 @@ object GenerateProcessedFiles extends App {
     "XIII" -> 12
   )
 
-  val legislatures = legislatureNumbersRoman.map { legislature =>
-    RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
-      case Right(deputados) =>
-        Some(
-          Legislature(
-            legislatureNumbersTrans.get(legislature).get,
-            groupProfessionsByCategory(getProfessions(deputados))
-          )
-        )
+  // Doesn't handle representatives changing professions but that's probably ok?
+  val representatives = legislatureNumbersRoman.map { legislatureNumber =>
+    RawDeputadoParser.getRawDeputados(filePath(legislatureNumber)) match {
+      case Right(rawDeputados: Seq[RawDeputado]) =>
+        rawDeputados.map(_.toRepresentative).map(r => r.id -> r).toMap
       case Left(err) =>
         println(err)
-        None
+        Map.empty
     }
-  }.flatten
+  }.flatten.toMap
+
+  
+
+  // val legislatures = legislatureNumbersRoman.map { legislature =>
+  //   RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
+  //     case Right(deputados) =>
+  //       println(s"$legislature -> ${deputados.size}")
+  //       Some(
+  //         Legislature(
+  //           legislatureNumbersTrans.get(legislature).get,
+  //           groupProfessionsByCategory(getProfessions(deputados)),
+  //           deputados.map(_.cadId)
+  //         )
+  //       )
+  //     case Left(err) =>
+  //       println(err)
+  //       None
+  //   }
+  // }.flatten
 
   // legislatures.foreach { l =>
   //   println(l.legislatureNumber)
@@ -50,41 +63,41 @@ object GenerateProcessedFiles extends App {
   //   println("--------------------")
   // }
 
-  writeToFile("../processed-data/professions.csv", toCsv(legislatures))
+//   writeToFile("../processed-data/professions.csv", toCsv(legislatures))
 
-  private def writeToFile(filePath: String, content: String): Unit = {
-    val pw = new PrintWriter(new File(filePath))
-    pw.write(content)
-    pw.close
-  }
+//   private def writeToFile(filePath: String, content: String): Unit = {
+//     val pw = new PrintWriter(new File(filePath))
+//     pw.write(content)
+//     pw.close
+//   }
 
-  private def toCsv(legislatures: Seq[Legislature]): String = {
-    val columnNames = "legislatureNumber,profession_cat,number_of_deputados"
-    val rows = legislatures
-      .flatMap { legislature =>
-        legislature.professions.map { case (profession_cat, n) =>
-          s"${legislature.number},$profession_cat,$n"
-        }
-      }
-      .mkString("\n")
-    columnNames + "\n" + rows
-  }
+//   private def toCsv(legislatures: Seq[Legislature]): String = {
+//     val columnNames = "legislatureNumber,profession_cat,number_of_deputados"
+//     val rows = legislatures
+//       .flatMap { legislature =>
+//         legislature.professions.map { case (profession_cat, n) =>
+//           s"${legislature.number},$profession_cat,$n"
+//         }
+//       }
+//       .mkString("\n")
+//     columnNames + "\n" + rows
+//   }
 
-  private def groupProfessionsByCategory(
-      professions: Seq[String]
-  ): Map[String, Int] = {
-    val (main, others) = professions
-      .map(ProfessionNormalizer.normalize)
-      .groupBy(identity)
-      .view
-      .mapValues(_.size)
-      .partition(_._2 > 1)
-    // others.toMap.keys.foreach(println)
-    main.toMap + ("Others" -> others.values.sum)
-  }
+//   private def groupProfessionsByCategory(
+//       professions: Seq[String]
+//   ): Map[String, Int] = {
+//     val (main, others) = professions
+//       .map(ProfessionNormalizer.normalize)
+//       .groupBy(identity)
+//       .view
+//       .mapValues(_.size)
+//       .partition(_._2 > 1)
+//     // others.toMap.keys.foreach(println)
+//     main.toMap + ("Others" -> others.values.sum)
+//   }
 
-  private def getProfessions(deputados: Seq[RawDeputado]): Seq[String] =
-    deputados
-      .map(_.cadProfissao)
-      .map(_.getOrElse("Unknown"))
-}
+//   private def getProfessions(deputados: Seq[RawDeputado]): Seq[String] =
+//     deputados
+//       .map(_.cadProfissao)
+//       .map(_.getOrElse("Unknown"))
+ }
