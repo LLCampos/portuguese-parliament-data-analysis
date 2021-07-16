@@ -4,7 +4,7 @@ import com.luiscampos.model._
 
 object GenerateProcessedFiles extends App {
 
-  def filePath(legislature: String) =
+  def registoBiograficoFilePath(legislature: String) =
     s"../raw-data/RegistoBiografico$legislature.json"
 
   def informacaoBaseFilePath(legislature: String) =
@@ -29,7 +29,7 @@ object GenerateProcessedFiles extends App {
 
   // Doesn't handle representatives changing professions but that's probably ok?
   val representatives = legislatureNumbersRoman.map { legislatureNumber =>
-    RawRepresentativeFromRegistoBiografico.fromRegistoBiograficoFile(filePath(legislatureNumber)) match {
+    RawRepresentativeFromRegistoBiografico.fromRegistoBiograficoFile(registoBiograficoFilePath(legislatureNumber)) match {
       case Right(rawRep) =>
         rawRep.map(_.toRepresentative).map(r => r.id -> r).toMap
       case Left(err) =>
@@ -39,7 +39,7 @@ object GenerateProcessedFiles extends App {
   }.flatten.toMap
 
   val legislatures = legislatureNumbersRoman.map { legislature =>
-    RawRepresentativeFromInformacaoBase.fromInformacaoBaseFile(filePath(legislature)) match {
+    RawRepresentativeFromInformacaoBase.fromInformacaoBaseFile(informacaoBaseFilePath(legislature)) match {
       case Right(rawReps: Seq[RawRepresentativeFromInformacaoBase]) =>
         println(s"$legislature -> ${rawReps.size}")
         val reps = rawReps.map(r => representatives.get(r.depCadId)).flatten
