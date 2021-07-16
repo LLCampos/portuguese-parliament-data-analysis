@@ -7,6 +7,9 @@ object GenerateProcessedFiles extends App {
   def filePath(legislature: String) =
     s"../raw-data/RegistoBiografico$legislature.json"
 
+  def informacaoBaseFilePath(legislature: String) =
+    s"../raw-data/InformacaoBase$legislature.json"
+
   val legislatureNumbersRoman =
     Seq("II", "III", "IV", "V", "VI", "VII", "VIII", "X", "XI", "XII", "XIII")
 
@@ -27,7 +30,7 @@ object GenerateProcessedFiles extends App {
   // Doesn't handle representatives changing professions but that's probably ok?
   val representatives = legislatureNumbersRoman.map { legislatureNumber =>
     RawRepresentativeFromRegistoBiografico.fromRegistoBiograficoFile(filePath(legislatureNumber)) match {
-      case Right(rawRep: Seq[RawRepresentativeFromRegistoBiografico]) =>
+      case Right(rawRep) =>
         rawRep.map(_.toRepresentative).map(r => r.id -> r).toMap
       case Left(err) =>
         println(err)
@@ -35,22 +38,23 @@ object GenerateProcessedFiles extends App {
     }
   }.flatten.toMap
 
-  // val legislatures = legislatureNumbersRoman.map { legislature =>
-  //   RawDeputadoParser.getRawDeputados(filePath(legislature)) match {
-  //     case Right(deputados) =>
-  //       println(s"$legislature -> ${deputados.size}")
-  //       Some(
-  //         Legislature(
-  //           legislatureNumbersTrans.get(legislature).get,
-  //           groupProfessionsByCategory(getProfessions(deputados)),
-  //           deputados.map(_.cadId)
-  //         )
-  //       )
-  //     case Left(err) =>
-  //       println(err)
-  //       None
-  //   }
-  // }.flatten
+  val legislatures = legislatureNumbersRoman.map { legislature =>
+    RawRepresentativeFromInformacaoBase.fromInformacaoBaseFile(filePath(legislature)) match {
+      case Right(rawReps: Seq[RawRepresentativeFromInformacaoBase]) =>
+        println(s"$legislature -> ${rawReps.size}")
+        val reps = rawReps.map(r => representatives.get(r.depCadId)).flatten
+        Some(
+          Legislature(
+            legislatureNumbersTrans.get(legislature).get,
+            groupProfessionsByCategory(getProfessions(reps)),
+            reps
+          )
+        )
+      case Left(err) =>
+        println(err)
+        None
+    }
+  }.flatten
 
   // legislatures.foreach { l =>
   //   println(l.legislatureNumber)
@@ -79,21 +83,15 @@ object GenerateProcessedFiles extends App {
 //     columnNames + "\n" + rows
 //   }
 
-//   private def groupProfessionsByCategory(
-//       professions: Seq[String]
-//   ): Map[String, Int] = {
-//     val (main, others) = professions
-//       .map(ProfessionNormalizer.normalize)
-//       .groupBy(identity)
-//       .view
-//       .mapValues(_.size)
-//       .partition(_._2 > 1)
-//     // others.toMap.keys.foreach(println)
-//     main.toMap + ("Others" -> others.values.sum)
-//   }
+  private def groupProfessionsByCategory(
+    professions: Seq[String]
+  ): Map[String, Int] = {
+    val (main, others) =
+      professions.map(ProfessionNormalizer.normalize).groupBy(identity).view.mapValues(_.size).partition(_._2 > 1)
+    // others.toMap.keys.foreach(println)
+    main.toMap + ("Others" -> others.values.sum)
+  }
 
-//   private def getProfessions(deputados: Seq[RawDeputado]): Seq[String] =
-//     deputados
-//       .map(_.cadProfissao)
-//       .map(_.getOrElse("Unknown"))
+  private def getProfessions(rep: Seq[Representative]): Seq[String] =
+    rep.map(_.professionCategory.getOrElse("Unknown"))
 }
