@@ -1,5 +1,4 @@
 legislatureNumber,profession_cat,number_of_deputados
-2,Engineering,10
 2,Academy,12
 2,Law,26
 2,Economy,6
@@ -8,16 +7,18 @@ legislatureNumber,profession_cat,number_of_deputados
 2,deputado,2
 2,Medicine,5
 2,Writing,3
+2,Engineering,10
+2,,58
 2,Public Servant,3
 2,Management,6
-2,Unknown,329
+2,Unknown,271
 2,Others,11
 2,Banking,2
 2,Blue Collar,4
 3,Academy,13
-3,Law,37
+3,Law,36
 3,Economy,6
-3,Teaching,23
+3,Teaching,22
 3,Journalism,2
 3,Business,2
 3,Retired,2
@@ -25,10 +26,10 @@ legislatureNumber,profession_cat,number_of_deputados
 3,Medicine,5
 3,Writing,4
 3,Engineering,14
-3,,304
+3,,186
 3,Public Servant,6
 3,Management,9
-3,Unknown,11
+3,Unknown,117
 3,Others,14
 3,Banking,8
 3,Blue Collar,6
