@@ -41,7 +41,6 @@ object GenerateProcessedFiles extends App {
   val legislatures = legislatureNumbersRoman.map { legislature =>
     RawRepresentativeFromInformacaoBase.fromInformacaoBaseFile(informacaoBaseFilePath(legislature)) match {
       case Right(rawReps: Seq[RawRepresentativeFromInformacaoBase]) =>
-        println(s"$legislature -> ${rawReps.size}")
         val reps = rawReps.map(r => representatives.get(r.depCadId)).flatten
         Some(
           Legislature(
